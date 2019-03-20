@@ -1,0 +1,13 @@
+X = [1930 1940 1950 1960 1970 1980];
+Y = [123203 131669 150697 179323 203212 226505];
+
+FUNCTION L = POLYINTERP(X, Y, X)
+  M = LENGTH(X);
+  A = ONES(1, M);
+  FOR I = 1:M
+    A(I) = 1 ./ PROD(X(I) - X([1:I-1, I+1:M]));
+    L = SUM(A .* Y ./ (X' - X)) ./ SUM(A ./ (X' - X));
+  ENDFOR
+ENDFUNCTION
+
+POLYINTERP(X, Y, 1955)
